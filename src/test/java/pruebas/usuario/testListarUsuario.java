@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pruebas.usario;
+package pruebas.usuario;
 
 import com.innovagenesis.service.dao.DaoUsuario;
-import com.innovagenesis.service.entidades.Usuarios;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,21 +14,18 @@ import java.util.logging.Logger;
  *
  * @author alexi
  */
-public class testActualizarUsuario {
+public class testListarUsuario {
     
     public static void main(String[] args) {
         
         DaoUsuario daoUsuario = new DaoUsuario();
-        Usuarios usuarios = new Usuarios(123457,"Santiago","Rojas",2);
-        usuarios.setId_usuario(3);
         
         try {
-            daoUsuario.actualizar(usuarios);
-            System.out.println("Usuario Actualizado");
+            System.out.println(daoUsuario.listar());
         } catch (SQLException ex) {
-            Logger.getLogger(testActualizarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error Actualizando");
+            Logger.getLogger(testListarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al listar");
         }
-        
     }
+    
 }

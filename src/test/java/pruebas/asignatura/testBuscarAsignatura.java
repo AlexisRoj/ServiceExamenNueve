@@ -21,7 +21,7 @@ public class testBuscarAsignatura {
         DaoAsignatura asignatura = new DaoAsignatura();
         
         try {
-            System.out.println(asignatura.buscar(2));
+            System.out.println(asignatura.buscar(4));
         } catch (SQLException ex) {
             Logger.getLogger(testBuscarAsignatura.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al realizar la busqueda");

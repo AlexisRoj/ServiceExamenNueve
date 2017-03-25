@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pruebas.usario;
+package pruebas.usuario;
 
 import com.innovagenesis.service.dao.DaoUsuario;
 import java.sql.SQLException;
@@ -14,20 +14,19 @@ import java.util.logging.Logger;
  *
  * @author alexi
  */
-public class testBuscarUsuario {
-
+public class testEliminarUsuario {
+    
     public static void main(String[] args) {
-
-        DaoUsuario daoUsuario = new DaoUsuario();
-
-        try {
-            System.out.println(daoUsuario.buscar(3));
-        } catch (SQLException ex) {
-            
-            Logger.getLogger(testBuscarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error en la busqueda");
-        }
         
+        DaoUsuario daoUsuario = new DaoUsuario();
+        
+        try {
+            daoUsuario.eliminar(2);
+            System.out.println("Usuario Eliminado");
+        } catch (SQLException ex) {
+            Logger.getLogger(testEliminarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al eliminar el usuario");
+        }
     }
-
+    
 }

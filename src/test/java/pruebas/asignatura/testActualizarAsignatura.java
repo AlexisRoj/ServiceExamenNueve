@@ -20,12 +20,12 @@ public class testActualizarAsignatura {
     public static void main(String[] args) {
         
             DaoAsignatura da = new DaoAsignatura();
-            Asignatura asignatura = new Asignatura("Alexis Jesus");
-            asignatura.setId_asigna(3);
+            Asignatura asignatura = new Asignatura("Fisica");
+            asignatura.setId_asigna(4);
             
         try {
             da.actualizar(asignatura);
-            System.out.println("Usuario actulizado");
+            System.out.println("Usuario actulizado ");         
         } catch (SQLException ex) {
             System.out.println("Error al actualizar");
             Logger.getLogger(testActualizarAsignatura.class.getName()).log(Level.SEVERE, null, ex);
