@@ -5,8 +5,8 @@
     <artifactId>serviceeseducativo</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>serviceeseducativo Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <name>serviceeseducativo</name>
+    <url>http://innovagenesis.com</url>
     <dependencies>
         
         <dependency>

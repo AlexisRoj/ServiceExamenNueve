@@ -48,4 +48,9 @@ public class Conexion {
         //Verifica que exista conexion a la bd
         return con != null && !con.isClosed();
     }
+    
+    public Connection getCon() {
+        // trae la conexion
+        return con;
+    }
 }
