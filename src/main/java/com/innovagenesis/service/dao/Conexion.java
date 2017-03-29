@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Conexion {
 
     private Connection con;
-    private final String driver = "con.mysql.cj.jdbc.Driver";
+    private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String usuario = "admin";
     private final String contrasena = "admin123+";
     private final String urlBaseDatos = "jdbc:mysql://localhost:3306/db_examen_nueve?serverTimezone=UTC"

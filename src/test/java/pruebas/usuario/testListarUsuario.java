@@ -18,7 +18,7 @@ public class testListarUsuario {
     
     public static void main(String[] args) {
         
-        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoUsuario daoUsuario = DaoUsuario.getInstanceUsuario();
         
         try {
             System.out.println(daoUsuario.listar());

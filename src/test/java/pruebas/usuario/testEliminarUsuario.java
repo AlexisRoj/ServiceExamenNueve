@@ -18,7 +18,7 @@ public class testEliminarUsuario {
     
     public static void main(String[] args) {
         
-        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoUsuario daoUsuario = DaoUsuario.getInstanceUsuario();
         
         try {
             daoUsuario.eliminar(2);

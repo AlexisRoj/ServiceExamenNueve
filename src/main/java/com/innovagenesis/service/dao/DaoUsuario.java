@@ -21,6 +21,21 @@ public class DaoUsuario implements IDAO<Usuarios>{
     private PreparedStatement sentenciaSQL;
     private String sql ="";
 
+    private static DaoUsuario instancia;
+
+    private DaoUsuario() {
+    }
+    
+    public static DaoUsuario getInstanceUsuario(){        
+        if (instancia == null) {
+            instancia = new DaoUsuario();
+        }        
+        return instancia;
+    } 
+    
+    
+    
+    
     @Override
     public void insertar(Usuarios entidad) throws SQLException {
         //Encargado de insertar los usuarios

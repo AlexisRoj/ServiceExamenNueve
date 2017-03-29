@@ -22,6 +22,20 @@ public class DaoAsignatura implements IDAO<Asignatura> {
     private PreparedStatement sentenciaSQL;
     private String sql = "";
 
+    private static DaoAsignatura instancia;
+
+    private DaoAsignatura() {
+    }
+    
+    public static DaoAsignatura getInstanceAsignatura(){
+        
+        if (instancia == null) {
+            instancia = new DaoAsignatura();
+        }
+        return instancia;        
+    }
+    
+    
     @Override
     public void insertar(Asignatura entidad) throws SQLException {
         //Inserar usuario

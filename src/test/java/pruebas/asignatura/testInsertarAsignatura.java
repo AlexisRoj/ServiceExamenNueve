@@ -19,7 +19,7 @@ public class testInsertarAsignatura {
 
     public static void main(String[] args) {
 
-        DaoAsignatura asignatura = new DaoAsignatura();
+        DaoAsignatura asignatura = DaoAsignatura.getInstanceAsignatura();
 
         try {
             asignatura.insertar(new Asignatura("CFisica"));

@@ -19,7 +19,7 @@ public class testActualizarAsignatura {
     
     public static void main(String[] args) {
         
-            DaoAsignatura da = new DaoAsignatura();
+            DaoAsignatura da = DaoAsignatura.getInstanceAsignatura();
             Asignatura asignatura = new Asignatura("Fisica");
             asignatura.setId_asigna(4);
             

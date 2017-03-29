@@ -19,7 +19,7 @@ public class testActualizarUsuario {
     
     public static void main(String[] args) {
         
-        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoUsuario daoUsuario = DaoUsuario.getInstanceUsuario();
         Usuarios usuarios = new Usuarios(123457,"Santiago","Rojas",2);
         usuarios.setId_usuario(3);
         

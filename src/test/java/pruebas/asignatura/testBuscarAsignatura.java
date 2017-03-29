@@ -18,7 +18,7 @@ public class testBuscarAsignatura {
     
     public static void main(String[] args) {
         
-        DaoAsignatura asignatura = new DaoAsignatura();
+        DaoAsignatura asignatura = DaoAsignatura.getInstanceAsignatura();
         
         try {
             System.out.println(asignatura.buscar(4));

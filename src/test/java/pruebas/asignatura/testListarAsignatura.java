@@ -18,8 +18,7 @@ public class testListarAsignatura {
     
     public static void main(String[] args) {
         
-        DaoAsignatura da = new DaoAsignatura();
-      
+        DaoAsignatura da = DaoAsignatura.getInstanceAsignatura();
         try {
               System.out.println(da.listar());
         } catch (SQLException ex) {

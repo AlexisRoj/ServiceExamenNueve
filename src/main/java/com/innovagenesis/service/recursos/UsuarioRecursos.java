@@ -3,30 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pruebas.usuario;
+package com.innovagenesis.service.recursos;
 
 import com.innovagenesis.service.dao.DaoUsuario;
 import com.innovagenesis.service.entidades.Usuarios;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author alexi
  */
-public class testInsertarUsuario {
+@Path("usuarios")
+public class UsuarioRecursos {
     
-    public static void main(String[] args) {
-        
-        DaoUsuario daoUsuario = DaoUsuario.getInstanceUsuario();
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Usuarios> get(){
         
         try {
-            daoUsuario.insertar(
-                    new Usuarios(110214,"ALLcioR","Rojas",2));
-            System.out.println("Usuario Insertado");
+            return DaoUsuario.getInstanceUsuario().listar();
         } catch (SQLException ex) {
-            Logger.getLogger(testInsertarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return null;
     }
+    
 }

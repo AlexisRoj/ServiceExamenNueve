@@ -18,7 +18,7 @@ public class testBuscarUsuario {
 
     public static void main(String[] args) {
 
-        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoUsuario daoUsuario = DaoUsuario.getInstanceUsuario();
 
         try {
             System.out.println(daoUsuario.buscar(3));

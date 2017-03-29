@@ -18,7 +18,7 @@ public class testEliminarAsignatura {
     
     public static void main(String[] args) {
         
-        DaoAsignatura daoAsignatura = new DaoAsignatura();
+        DaoAsignatura daoAsignatura = DaoAsignatura.getInstanceAsignatura();
         
         try {
             daoAsignatura.eliminar(1);
