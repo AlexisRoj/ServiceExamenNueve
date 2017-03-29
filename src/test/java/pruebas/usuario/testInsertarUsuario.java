@@ -23,7 +23,7 @@ public class testInsertarUsuario {
         
         try {
             daoUsuario.insertar(
-                    new Usuarios(110214,"AocioR","Rojas",2));
+                    new Usuarios(110214,"ALLcioR","Rojas",2));
             System.out.println("Usuario Insertado");
         } catch (SQLException ex) {
             Logger.getLogger(testInsertarUsuario.class.getName()).log(Level.SEVERE, null, ex);

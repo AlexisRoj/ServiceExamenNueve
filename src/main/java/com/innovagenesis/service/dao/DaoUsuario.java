@@ -100,8 +100,8 @@ public class DaoUsuario implements IDAO<Usuarios>{
                 + "nom_usuario = ?,"
                 + "pass_usuario = ?,"
                 + "rol_usuario = ? "
-                + "WHERE id_usuario = ?";
-        
+                + "WHERE id_usuario = ?";       
+               
         if (sentenciaSQL == null) {
             sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
         }

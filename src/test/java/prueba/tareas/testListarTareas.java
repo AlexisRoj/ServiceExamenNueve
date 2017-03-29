@@ -6,7 +6,6 @@
 package prueba.tareas;
 
 import com.innovagenesis.service.dao.DaoTarea;
-import com.innovagenesis.service.entidades.Tareas;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,21 +14,18 @@ import java.util.logging.Logger;
  *
  * @author alexi
  */
-public class testInsetarTarea {
+public class testListarTareas {
     
     public static void main(String[] args) {
-        DaoTarea daoTarea = DaoTarea.getIntanceTarea();
         
-        try {
-            daoTarea.insertar(new Tareas("Examen Ciencia",3,110213,90));
-            System.out.println("Usuario insertado");
+            DaoTarea daoTarea = DaoTarea.getIntanceTarea();
             
+        try {
+            System.out.println(daoTarea.listar());
         } catch (SQLException ex) {
-            Logger.getLogger(testInsetarTarea.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error insertando usuario");
+            Logger.getLogger(testListarTareas.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al listar tareas");
         }
-    }
-    
-    
+    }      
     
 }

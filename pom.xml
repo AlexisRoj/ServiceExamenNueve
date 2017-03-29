@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.innovagenesis</groupId>
-    <artifactId>serviceeseducativo</artifactId>
+    <artifactId>WebServiceExamenNueve</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>serviceeseducativo</name>
+    <name>WebServiceExamenNueve</name>
     <url>http://innovagenesis.com</url>
     <dependencies>
         
@@ -17,42 +17,41 @@
         </dependency>
         
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.2</version>
+        </dependency>
+        
+        <dependency>
             <groupId>org.glassfish.jersey.bundles</groupId>
             <artifactId>jaxrs-ri</artifactId>
-            <version>2.26-b03</version>
-        </dependency>   
+            <version>2.23.1</version>
+        </dependency>
         
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
-            <version>2.26-b03</version>
-        </dependency>    
-                
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>2.23.1</version>
         </dependency>
-                        
-    </dependencies>
-    
-    <build>
-        <finalName>serviceeseducativo</finalName>
         
+    </dependencies>
+  
+    <build>
+        <finalName>WebServiceNextUniversity</finalName>
+    
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
-    
+        
     </build>
     
 </project>
 
-// auto ident = alt + shift + f
