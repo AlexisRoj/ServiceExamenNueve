@@ -19,35 +19,33 @@ import java.util.List;
  */
 public class DaoAsignatura implements IDAO<Asignatura> {
 
-    private PreparedStatement sentenciaSQL;
+    private PreparedStatement insetar, eliminar, listar, buscar, actualizar;
     private String sql = "";
 
     private static DaoAsignatura instancia;
 
     private DaoAsignatura() {
     }
-    
-    public static DaoAsignatura getInstanceAsignatura(){
-        
+
+    public static DaoAsignatura getInstanceAsignatura() {
+
         if (instancia == null) {
             instancia = new DaoAsignatura();
         }
-        return instancia;        
+        return instancia;
     }
-    
-    
+
     @Override
     public void insertar(Asignatura entidad) throws SQLException {
         //Inserar usuario
-        sql = "INSERT INTO tbl_asignatura (nom_asignatura) "
-                + "VALUES (?)";
+        sql = "INSERT INTO tbl_asignatura (nom_asignatura) VALUES ( ? )";
 
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (insetar == null) {
+            insetar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
 
-        sentenciaSQL.setString(1, entidad.getNom_asigna());
-        sentenciaSQL.executeUpdate();
+        insetar.setString(1, entidad.getNom_asigna());
+        insetar.executeUpdate();
     }
 
     @Override
@@ -55,28 +53,28 @@ public class DaoAsignatura implements IDAO<Asignatura> {
         //Eliminar usuario
         sql = "DELETE FROM tbl_asignatura WHERE id_asignatura = ?";
 
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (eliminar == null) {
+            eliminar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
-        sentenciaSQL.setInt(1, id);
-        sentenciaSQL.executeUpdate();
+        eliminar.setInt(1, id);
+        eliminar.executeUpdate();
     }
 
     @Override
     public List<Asignatura> listar() throws SQLException {
         //Listar Asignatura
         sql = "SELECT * FROM tbl_asignatura";
-        
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+
+        if (listar == null) {
+            listar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
-        
-        ResultSet set = sentenciaSQL.executeQuery();
+
+        ResultSet set = listar.executeQuery();
         ArrayList<Asignatura> result = new ArrayList<>();
-        
-        while(set.next()){
+
+        while (set.next()) {
             result.add(cargar(set));
-        }        
+        }
         return result;
     }
 
@@ -84,43 +82,42 @@ public class DaoAsignatura implements IDAO<Asignatura> {
     public Asignatura buscar(Integer id) throws SQLException {
         //Buscar por id
         sql = "SELECT * FROM tbl_asignatura WHERE id_asignatura = ?";
-        
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);            
+
+        if (buscar == null) {
+            buscar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
-        sentenciaSQL.setInt(1, id);
-        
-        ResultSet set = sentenciaSQL.executeQuery();
-        
-        return  set != null && set.next() ? cargar(set) : null;
+        buscar.setInt(1, id);
+
+        ResultSet set = buscar.executeQuery();
+
+        return set != null && set.next() ? cargar(set) : null;
     }
 
-    @Override
-    public void actualizar(Asignatura entidad) throws SQLException {
-       
-        sql = "UPDATE tbl_asignatura SET "
-                + "nom_asignatura = ? "
-                + "WHERE id_asignatura = ?";
-        
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
-        }
-        
-        sentenciaSQL.setString(1, entidad.getNom_asigna());
-        sentenciaSQL.setInt(2, entidad.getId_asigna());
-        
-        sentenciaSQL.executeUpdate();
-    }
-    
-    
-    public Asignatura cargar (ResultSet set) throws SQLException{
-        
+    public Asignatura cargar(ResultSet set) throws SQLException {
+
         Asignatura asignatura = new Asignatura();
         //Cargar Asigntura
         asignatura.setId_asigna(set.getInt("id_asignatura"));
         asignatura.setNom_asigna(set.getString("nom_asignatura"));
-        
+
         return asignatura;
+    }
+
+    @Override
+    public void actualizar(Asignatura entidad) throws SQLException {
+
+        sql = "UPDATE tbl_asignatura SET "
+                + "nom_asignatura = ? "
+                + "WHERE id_asignatura = ?";
+
+        if (actualizar == null) {
+            actualizar = Conexion.getIntance().getCon().prepareStatement(sql);
+        }
+
+        actualizar.setString(1, entidad.getNom_asigna());
+        actualizar.setInt(2, entidad.getId_asigna());
+
+        actualizar.executeUpdate();
     }
 
 }

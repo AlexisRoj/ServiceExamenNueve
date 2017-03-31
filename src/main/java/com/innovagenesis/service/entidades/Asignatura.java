@@ -15,11 +15,11 @@ public class Asignatura {
     private int id_asigna;
     private String nom_asigna;
 
-    public Asignatura() {
-    }
-
     public Asignatura(String nom_asigna) {
         this.nom_asigna = nom_asigna;
+    }
+
+    public Asignatura() {
     }
 
     public int getId_asigna() {

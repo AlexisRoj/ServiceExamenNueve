@@ -11,8 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -33,9 +36,31 @@ public class TareasRecursos {
             return DaoTarea.getIntanceTarea().listar();
         } catch (SQLException ex) {
             Logger.getLogger(TareasRecursos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }        
         return null;
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void post(Tareas tareas){
+        
+        try {
+            DaoTarea.getIntanceTarea().insertar(tareas);
+        } catch (SQLException ex) {
+            Logger.getLogger(TareasRecursos.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    @GET
+    @Path("{id}")
+    public Tareas buscarID (@PathParam("id")Integer id){
+        //Buescar por id        
+        try {
+           return DaoTarea.getIntanceTarea().buscar(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(TareasRecursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return  null;
     }
     
 }

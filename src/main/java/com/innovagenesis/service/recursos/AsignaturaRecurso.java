@@ -11,8 +11,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,7 +31,7 @@ public class AsignaturaRecurso {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Asignatura> get(){
-        
+        //Listar componenentes
         try {
             return DaoAsignatura.getInstanceAsignatura().listar();
         } catch (SQLException ex) {
@@ -36,4 +41,50 @@ public class AsignaturaRecurso {
         return null;
     }
     
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void post (Asignatura asignatura){
+        //Insertar
+        try {
+            DaoAsignatura.getInstanceAsignatura().insertar(asignatura);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsignaturaRecurso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @DELETE
+    @Path("{id_tareas}")
+    public void eliminar (@PathParam("id_tareas")Integer id_tareas){
+        //Borrar
+        try {
+            DaoAsignatura.getInstanceAsignatura().eliminar(id_tareas);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsignaturaRecurso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @GET
+    @Path("{id_tareas}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Asignatura buscar(@PathParam("id_tareas")Integer id_tareas){
+        //Buscar por id
+        try {
+            return DaoAsignatura.getInstanceAsignatura().buscar(id_tareas);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsignaturaRecurso.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return null;
+    }
+    
+    @PUT
+    @Path("{id_asignatura}")
+    public void actualizar(@PathParam("id_asignatura")Integer id_asignatura,Asignatura asignatura){
+        //Actualizar
+        asignatura.setId_asigna(id_asignatura);
+        try {            
+            DaoAsignatura.getInstanceAsignatura().actualizar(asignatura);
+        } catch (SQLException ex) {
+            Logger.getLogger(AsignaturaRecurso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

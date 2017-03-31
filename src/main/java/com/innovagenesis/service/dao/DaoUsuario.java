@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class DaoUsuario implements IDAO<Usuarios>{
     
-    private PreparedStatement sentenciaSQL;
+    private PreparedStatement listar,buscar,borrar,actualizar,insertar;
     private String sql ="";
 
     private static DaoUsuario instancia;
@@ -31,9 +31,7 @@ public class DaoUsuario implements IDAO<Usuarios>{
             instancia = new DaoUsuario();
         }        
         return instancia;
-    } 
-    
-    
+    }      
     
     
     @Override
@@ -46,16 +44,16 @@ public class DaoUsuario implements IDAO<Usuarios>{
                 + "rol_usuario)"
                 + "VALUES (?,?,?,?)";
         
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);            
+        if (insertar== null) {
+            insertar = Conexion.getIntance().getCon().prepareStatement(sql);            
         }
         
-        sentenciaSQL.setInt(1, entidad.getCed_usuario());
-        sentenciaSQL.setString(2, entidad.getNom_usuario());
-        sentenciaSQL.setString(3, entidad.getPass_usuario());
-        sentenciaSQL.setInt(4, entidad.getRol_user());
+        insertar.setInt(1, entidad.getCed_usuario());
+        insertar.setString(2, entidad.getNom_usuario());
+        insertar.setString(3, entidad.getPass_usuario());
+        insertar.setInt(4, entidad.getRol_user());
                 
-        sentenciaSQL.executeUpdate();
+        insertar.executeUpdate();
         
     }
 
@@ -64,11 +62,11 @@ public class DaoUsuario implements IDAO<Usuarios>{
         //Elimina el usuario
         sql = "DELETE FROM tbl_usuario WHERE id_usuario = ?";
         
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (borrar == null) {
+            borrar = Conexion.getIntance().getCon().prepareStatement(sql);
         }        
-        sentenciaSQL.setInt(1, id);
-        sentenciaSQL.executeUpdate();
+        borrar.setInt(1, id);
+        borrar.executeUpdate();
     }
     
 
@@ -77,11 +75,11 @@ public class DaoUsuario implements IDAO<Usuarios>{
         //Listar Usuarios        
         sql = "SELECT * FROM tbl_usuario";
         
-        if (sentenciaSQL == null) {            
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);            
+        if (listar == null) {            
+            listar = Conexion.getIntance().getCon().prepareStatement(sql);            
         }
                        
-        ResultSet set = sentenciaSQL.executeQuery();
+        ResultSet set = listar.executeQuery();
         ArrayList<Usuarios> result = new ArrayList<>();
         
         while (set.next()){
@@ -95,13 +93,13 @@ public class DaoUsuario implements IDAO<Usuarios>{
         // Buscar Usuario
         sql = "SELECT * FROM tbl_usuario WHERE id_usuario = ?";
         
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (buscar == null) {
+            buscar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
             
-        sentenciaSQL.setInt(1, id);
+        buscar.setInt(1, id);
         
-        ResultSet set = sentenciaSQL.executeQuery();
+        ResultSet set = buscar.executeQuery();
         
         return set != null && set.next() ? cargar(set) : null;
 
@@ -117,23 +115,24 @@ public class DaoUsuario implements IDAO<Usuarios>{
                 + "rol_usuario = ? "
                 + "WHERE id_usuario = ?";       
                
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (actualizar == null) {
+            actualizar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
         
-        sentenciaSQL.setInt(1, entidad.getCed_usuario());
-        sentenciaSQL.setString(2, entidad.getNom_usuario());
-        sentenciaSQL.setString(3, entidad.getPass_usuario());
-        sentenciaSQL.setInt(4, entidad.getRol_user());
-        sentenciaSQL.setInt(5, entidad.getId_usuario());
+        actualizar.setInt(1, entidad.getCed_usuario());
+        actualizar.setString(2, entidad.getNom_usuario());
+        actualizar.setString(3, entidad.getPass_usuario());
+        actualizar.setInt(4, entidad.getRol_user());
+        actualizar.setInt(5, entidad.getId_usuario());
         
-        sentenciaSQL.executeUpdate();
+        actualizar.executeUpdate();
     }
     
     public Usuarios cargar (ResultSet set) throws SQLException{
         
         Usuarios usuarios = new Usuarios();
         
+        usuarios.setId_usuario(set.getInt("id_usuario"));
         usuarios.setCed_usuario(set.getInt("ced_usuario"));
         usuarios.setNom_usuario(set.getString("nom_usuario"));
         usuarios.setPass_usuario(set.getString("pass_usuario"));

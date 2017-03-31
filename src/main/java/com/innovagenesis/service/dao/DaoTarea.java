@@ -19,7 +19,7 @@ import java.util.List;
 public class DaoTarea implements IDAO<Tareas> {
 
     private String sql = "";
-    private PreparedStatement sentenciaSQL;
+    private PreparedStatement listar, buscar, insertar, borrar, actualizar;
     
     private static DaoTarea instancia;
 
@@ -45,28 +45,28 @@ public class DaoTarea implements IDAO<Tareas> {
                 + "nota_tareas) "
                 + "VALUES (?,?,?,?)";
 
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (insertar == null) {
+            insertar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
 
-        sentenciaSQL.setString(1, entidad.getNom_tarea());
-        sentenciaSQL.setInt(2, entidad.getId_asigna_tarea());
-        sentenciaSQL.setInt(3, entidad.getId_estudiante_tarea());
-        sentenciaSQL.setInt(4, entidad.getNota_tarea());
+        insertar.setString(1, entidad.getNom_tarea());
+        insertar.setInt(2, entidad.getId_asigna_tarea());
+        insertar.setInt(3, entidad.getId_estudiante_tarea());
+        insertar.setInt(4, entidad.getNota_tarea());
 
-        sentenciaSQL.executeUpdate();
+        insertar.executeUpdate();
     }
 
     @Override
     public void eliminar(Integer id) throws SQLException {
         //Eliminar tarea
-        sql = "DELETE FROM tbl_tareas WHERE id = ?";
+        sql = "DELETE FROM tbl_tareas WHERE id_tareas = ?";
 
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (borrar == null) {
+            borrar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
-        sentenciaSQL.setInt(1, id);
-        sentenciaSQL.executeUpdate();
+        borrar.setInt(1, id);
+        borrar.executeUpdate();
 
     }
 
@@ -90,11 +90,11 @@ public class DaoTarea implements IDAO<Tareas> {
                 + "        AND asignatura.id_asignatura = tareas.id_asigna_tareas "
                 + "GROUP BY tareas.id_asigna_tareas , tareas.nom_tareas , asignatura.nom_asignatura , usuario.nom_usuario";
 
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (listar == null) {
+            listar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
 
-        ResultSet set = sentenciaSQL.executeQuery();
+        ResultSet set = listar.executeQuery();
         ArrayList<Tareas> resultado = new ArrayList<>();
 
         while (set.next()) {
@@ -125,12 +125,12 @@ public class DaoTarea implements IDAO<Tareas> {
                 + "        AND tareas.id_tareas = ? "
                 + "GROUP BY tareas.id_asigna_tareas , tareas.nom_tareas , asignatura.nom_asignatura , usuario.nom_usuario";
         
-        if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareStatement(sql);
+        if (buscar == null) {
+            buscar = Conexion.getIntance().getCon().prepareStatement(sql);
         }
         
-        sentenciaSQL.setInt(1, id);
-        ResultSet set = sentenciaSQL.executeQuery();        
+        buscar.setInt(1, id);
+        ResultSet set = buscar.executeQuery();        
         
         return set != null && set.next() ? cargar(set) : null;
 
@@ -146,17 +146,17 @@ public class DaoTarea implements IDAO<Tareas> {
                 + "nota_tareas"
                 + "WHERE id_tareas = ?";
         
-         if (sentenciaSQL == null) {
-            sentenciaSQL = Conexion.getIntance().getCon().prepareCall(sql);            
+         if (actualizar == null) {
+            actualizar = Conexion.getIntance().getCon().prepareCall(sql);            
         }        
         
-         sentenciaSQL.setString(1, entidad.getNom_tarea());
-         sentenciaSQL.setInt(2, entidad.getId_asigna_tarea());
-         sentenciaSQL.setInt(3, entidad.getId_estudiante_tarea());
-         sentenciaSQL.setInt(4, entidad.getNota_tarea());
-         sentenciaSQL.setInt(5, entidad.getId_tarea());
+         actualizar.setString(1, entidad.getNom_tarea());
+         actualizar.setInt(2, entidad.getId_asigna_tarea());
+         actualizar.setInt(3, entidad.getId_estudiante_tarea());
+         actualizar.setInt(4, entidad.getNota_tarea());
+         actualizar.setInt(5, entidad.getId_tarea());
          
-        sentenciaSQL.executeUpdate();
+        actualizar.executeUpdate();
     }
 
     public Tareas cargar(ResultSet set) throws SQLException {

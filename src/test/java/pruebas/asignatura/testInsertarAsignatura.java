@@ -22,7 +22,7 @@ public class testInsertarAsignatura {
         DaoAsignatura asignatura = DaoAsignatura.getInstanceAsignatura();
 
         try {
-            asignatura.insertar(new Asignatura("CFisica"));
+            asignatura.insertar(new Asignatura("Cisica2"));
             System.out.println("Materia insertada corectamente");
         } catch (SQLException ex) {
             Logger.getLogger(testInsertarAsignatura.class.getName()).log(Level.SEVERE, null, ex);
