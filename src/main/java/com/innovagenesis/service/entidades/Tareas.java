@@ -37,9 +37,6 @@ public class Tareas {
         this.id_estudiante_tarea = id_estudiante_tarea;
         this.nota_tarea = nota_tarea;
     }
-    
-    
-    
 
     public String getNom_asigna_tarea() {
         return nom_asigna_tarea;

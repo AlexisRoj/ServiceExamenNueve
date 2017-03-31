@@ -76,9 +76,9 @@ public class DaoTarea implements IDAO<Tareas> {
         sql = "SELECT "
                 + "    tareas.id_tareas AS id,"
                 + "    tareas.nom_tareas AS nombre,"
-                + "    asignatura.id_asignatura AS asignatura,"
+                + "    asignatura.id_asignatura AS IdAsigna,"
                 + "    asignatura.nom_asignatura AS asignatura,"
-                + "    usuario.id_usuario AS nombreUsuario," 
+                + "    usuario.ced_usuario AS IdUsuario," 
                 + "    usuario.nom_usuario AS nombreUsuario,"
                 + "    tareas.nota_tareas  AS nota "
                 + "FROM"
@@ -110,12 +110,12 @@ public class DaoTarea implements IDAO<Tareas> {
         sql =  sql = "SELECT "
                 + "    tareas.id_tareas AS id,"
                 + "    tareas.nom_tareas AS nombre,"
-                + "    asignatura.id_asignatura AS asignatura,"
+                + "    asignatura.id_asignatura AS idAsigna "
                 + "    asignatura.nom_asignatura AS asignatura,"
-                + "    usuario.id_usuario AS nombreUsuario,"
+                + "    usuario.ced_usuario AS IdUsuario,"
                 + "    usuario.nom_usuario AS nombreUsuario,"
                 + "    tareas.nota_tareas  AS nota "
-                + "FROM"
+                + "FROM "
                 + "    tbl_tareas tareas,"
                 + "    tbl_usuario usuario,"
                 + "    tbl_asignatura asignatura "
@@ -139,11 +139,11 @@ public class DaoTarea implements IDAO<Tareas> {
     @Override
     public void actualizar(Tareas entidad) throws SQLException {
         //Encargada de realizar la actualizacion de tareas
-        sql = "UPDATE tbl_tareas SET"
+        sql = "UPDATE tbl_tareas SET "
                 + "nom_tareas = ?,"
                 + "id_asigna_tareas = ?,"
                 + "id_estudiante_tareas = ?,"
-                + "nota_tareas"
+                + "nota_tareas = ? "
                 + "WHERE id_tareas = ?";
         
          if (actualizar == null) {
@@ -163,9 +163,11 @@ public class DaoTarea implements IDAO<Tareas> {
         //Metodo encargado de cargar los elementos a la hora de listar
         Tareas tareas = new Tareas();
         tareas.setId_tarea(set.getInt("id"));
-        tareas.setNom_tarea(set.getNString("nombre"));
-        tareas.setNom_asigna_tarea("asignatura");
-        tareas.setNom_usuario_tarea("nombreUsuario");
+        tareas.setNom_tarea(set.getString("nombre"));
+        tareas.setId_asigna_tarea(set.getInt("IdAsigna"));
+        tareas.setNom_asigna_tarea(set.getString("asignatura"));
+        tareas.setId_estudiante_tarea(set.getInt("IdUsuario"));
+        tareas.setNom_usuario_tarea(set.getString("nombreUsuario"));
         tareas.setNota_tarea(set.getInt("nota"));
         return tareas;
 
