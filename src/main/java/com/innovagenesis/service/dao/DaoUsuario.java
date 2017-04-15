@@ -18,7 +18,8 @@ import java.util.List;
  */
 public class DaoUsuario implements IDAO<Usuarios>{
     
-    private PreparedStatement listar,buscar,borrar,actualizar,insertar;
+    private PreparedStatement listar,buscar,borrar,actualizar,insertar, 
+            buscarLogin;
     private String sql ="";
 
     private static DaoUsuario instancia;
@@ -104,6 +105,31 @@ public class DaoUsuario implements IDAO<Usuarios>{
         return set != null && set.next() ? cargar(set) : null;
 
     }
+    
+    
+    @Override
+    public Usuarios buscarLogin(String usuario, String contrasena) throws SQLException {
+        // Buscar Usuario
+        sql = "SELECT * FROM tbl_usuario"
+                + " WHERE nom_usuario = ?"
+                + " AND pass_usuario = ?";
+        
+        if (buscarLogin == null) {
+            buscarLogin = Conexion.getIntance().getCon().prepareStatement(sql);
+        }
+            
+        buscarLogin.setString(1, usuario);
+        buscarLogin.setString(2, contrasena);
+        
+        
+        ResultSet set = buscarLogin.executeQuery();
+        
+        return set != null && set.next() ? cargar(set) : null;
+
+    }
+    
+    
+    
 
     @Override
     public void actualizar(Usuarios entidad) throws SQLException {
