@@ -21,7 +21,7 @@ public class testBuscarUsuario {
         DaoUsuario daoUsuario = DaoUsuario.getInstanceUsuario();
 
         try {
-            System.out.println(daoUsuario.buscar(3));
+            System.out.println(daoUsuario.buscarLogin("prueba","prueba"));
         } catch (SQLException ex) {
             
             Logger.getLogger(testBuscarUsuario.class.getName()).log(Level.SEVERE, null, ex);

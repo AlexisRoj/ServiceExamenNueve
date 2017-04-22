@@ -45,12 +45,15 @@ public class TareasRecursos {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void post(Tareas tareas){
+    //Se le agrego boolean y los dos return, este metodo era void
+    public Boolean post(Tareas tareas){
         //Insetar un elemento
         try {
             DaoTarea.getIntanceTarea().insertar(tareas);
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(TareasRecursos.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }        
     }
     

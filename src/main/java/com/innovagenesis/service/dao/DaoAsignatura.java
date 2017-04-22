@@ -120,4 +120,9 @@ public class DaoAsignatura implements IDAO<Asignatura> {
         actualizar.executeUpdate();
     }
 
+    @Override
+    public Asignatura buscarLogin(String usuario, String contrasena) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

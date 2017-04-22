@@ -22,5 +22,7 @@ public interface IDAO <T> {
     
     T buscar (Integer id) throws SQLException;
     
+    T buscarLogin (String usuario, String contrasena) throws SQLException;
+           
     void actualizar (T entidad) throws SQLException;
 }

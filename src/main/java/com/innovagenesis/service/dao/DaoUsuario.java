@@ -109,7 +109,8 @@ public class DaoUsuario implements IDAO<Usuarios>{
     
     @Override
     public Usuarios buscarLogin(String usuario, String contrasena) throws SQLException {
-        // Buscar Usuario
+        // Buscar Usuario      
+        
         sql = "SELECT * FROM tbl_usuario"
                 + " WHERE nom_usuario = ?"
                 + " AND pass_usuario = ?";

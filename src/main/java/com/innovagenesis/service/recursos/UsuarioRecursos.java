@@ -27,22 +27,22 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("usuarios")
 public class UsuarioRecursos {
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     //Listar usuarios
-    public List<Usuarios> get(){        
+    public List<Usuarios> get() {
         try {
             return DaoUsuario.getInstanceUsuario().listar();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
         return null;
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void post(Usuarios usuarios){
+    public void post(Usuarios usuarios) {
         //Insertar usuario
         try {
             DaoUsuario.getInstanceUsuario().insertar(usuarios);
@@ -50,34 +50,47 @@ public class UsuarioRecursos {
             Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+//    @GET
+//    @Path("{id_usuario}")
+//    public Usuarios buscarID(@PathParam("id_usuario") Integer id_usuario) {
+//        //Buscar usuario
+//        try {
+//            return DaoUsuario.getInstanceUsuario().buscar(id_usuario);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+//    }
+
     @GET
-    @Path("{id_usuario}")
-    public Usuarios buscarID(@PathParam("id_usuario")Integer id_usuario){
+    @Path("{nom_usuario}/{pass_usuario}")
+    public Usuarios buscarLog(@PathParam("nom_usuario") String nom_usuario,
+            @PathParam("pass_usuario") String contrasena) {
         //Buscar usuario
         try {
-            return DaoUsuario.getInstanceUsuario().buscar(id_usuario);
+            return DaoUsuario.getInstanceUsuario().buscarLogin(nom_usuario,contrasena);
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return  null;        
+        return null;
     }
-    
+
     @PUT
     @Path("{id_usuario}")
-    public void put (@PathParam("id_usuario")Integer id_usuario,Usuarios usuarios ){
+    public void put(@PathParam("id_usuario") Integer id_usuario, Usuarios usuarios) {
         //Actualizar servicio
         usuarios.setId_usuario(id_usuario);
         try {
-            DaoUsuario.getInstanceUsuario().actualizar(usuarios);            
+            DaoUsuario.getInstanceUsuario().actualizar(usuarios);
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
-    
+    }
+
     @DELETE
     @Path("{id}")
-    public void delete(@PathParam("id")Integer id){
+    public void delete(@PathParam("id") Integer id) {
         //Metodo que elimina un elemento
         try {
             DaoUsuario.getInstanceUsuario().eliminar(id);
@@ -85,6 +98,5 @@ public class UsuarioRecursos {
             Logger.getLogger(UsuarioRecursos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
-            
+
 }

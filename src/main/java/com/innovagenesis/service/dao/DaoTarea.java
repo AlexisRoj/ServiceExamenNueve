@@ -47,8 +47,8 @@ public class DaoTarea implements IDAO<Tareas> {
 
         if (insertar == null) {
             insertar = Conexion.getIntance().getCon().prepareStatement(sql);
-        }
-
+        }       
+        
         insertar.setString(1, entidad.getNom_tarea());
         insertar.setInt(2, entidad.getId_asigna_tarea());
         insertar.setInt(3, entidad.getId_estudiante_tarea());
@@ -133,7 +133,6 @@ public class DaoTarea implements IDAO<Tareas> {
         ResultSet set = buscar.executeQuery();        
         
         return set != null && set.next() ? cargar(set) : null;
-
     }
 
     @Override
@@ -171,6 +170,11 @@ public class DaoTarea implements IDAO<Tareas> {
         tareas.setNota_tarea(set.getInt("nota"));
         return tareas;
 
+    }
+
+    @Override
+    public Tareas buscarLogin(String usuario, String contrasena) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
